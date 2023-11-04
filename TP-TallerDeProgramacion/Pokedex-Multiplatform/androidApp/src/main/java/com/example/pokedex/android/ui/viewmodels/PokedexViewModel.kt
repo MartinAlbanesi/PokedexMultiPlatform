@@ -1,28 +1,31 @@
 package com.example.pokedex.android.ui.viewmodels
 
-import android.content.Context
-import android.net.ConnectivityManager
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokedex.data.PokedexResults
-import com.example.pokedex.data.PokedexService
+import com.example.pokedex.android.ui.activities.PokedexScreenState
+import com.example.pokedex.data.IPokedexRepository
 import kotlinx.coroutines.launch
 
-class PokedexViewModel() : ViewModel() {
+class PokedexViewModel(
+    private val pokedexRepository: IPokedexRepository,
+) : ViewModel() {
 
-    private val pokedexService = PokedexService()
-    val pokedex = MutableLiveData<List<PokedexResults>>()
-
-    fun getPokemonList() {
-        viewModelScope.launch {
-            pokedex.value = pokedexService.getPokedex()
-        }
-    }
+    private val _pokedex = MutableLiveData<PokedexScreenState>(PokedexScreenState.Loading)
+    val pokedex: LiveData<PokedexScreenState> = _pokedex
 
     init {
         getPokemonList()
     }
+
+    fun getPokemonList() {
+        viewModelScope.launch {
+            val response = pokedexRepository.getPokedex()
+            _pokedex.value = PokedexScreenState.ShowPokedex(response)
+        }
+    }
+
     /*
         val pokedex = MutableLiveData<Pokedex>()
 

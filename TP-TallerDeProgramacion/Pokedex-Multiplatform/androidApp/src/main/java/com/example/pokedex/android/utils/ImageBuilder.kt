@@ -1,4 +1,4 @@
-package com.example.pokedex.android
+package com.example.pokedex.android.utils
 
 object ImageBuilder {
 

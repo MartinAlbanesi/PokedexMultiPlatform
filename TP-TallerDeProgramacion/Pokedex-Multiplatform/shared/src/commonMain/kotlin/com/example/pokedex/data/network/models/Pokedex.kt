@@ -1,4 +1,4 @@
-package com.example.pokedex.data
+package com.example.pokedex.data.network.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,5 +10,5 @@ data class Pokedex(
     @SerialName("next")
     val next: String,
     @SerialName("results")
-    val results: List<PokedexResults>
+    val results: List<PokedexResults>,
 )

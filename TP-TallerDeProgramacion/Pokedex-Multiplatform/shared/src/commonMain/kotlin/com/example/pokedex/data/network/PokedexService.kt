@@ -1,5 +1,7 @@
-package com.example.pokedex.data
+package com.example.pokedex.data.network
 
+import com.example.pokedex.data.network.models.Pokedex
+import com.example.pokedex.data.network.models.PokedexResults
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -20,7 +22,11 @@ class PokedexService {
     }
 
     suspend fun getPokedex(): List<PokedexResults> {
-        val response = client.get("https://pokeapi.co/api/v2/pokemon/?limit=800")
-        return response.body<Pokedex>().results
+        return try {
+            val response = client.get("https://pokeapi.co/api/v2/pokemon/?limit=800")
+            response.body<Pokedex>().results
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }

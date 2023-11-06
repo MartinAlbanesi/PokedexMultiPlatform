@@ -62,7 +62,7 @@ fun PokedexScreen(pokedexViewModel: PokedexViewModel) {
                             modifier = Modifier
                                 .size(300.dp, 500.dp)
                                 .clip(RoundedCornerShape(15.dp))
-                                .background(Color.DarkGray),
+                                .background(MaterialTheme.colors.background),
                             contentAlignment = Alignment.Center,
                         ) {
                             Column(
@@ -93,7 +93,7 @@ fun PokedexScreen(pokedexViewModel: PokedexViewModel) {
                                 // .padding(horizontal = 40.dp, vertical = 100.dp)
                                 .size(300.dp, 500.dp)
                                 .clip(RoundedCornerShape(15.dp))
-                                .background(Color.Cyan),
+                                .background(MaterialTheme.colors.surface),
                         ) {
                             items(pokemonList) { pokemon ->
                                 PokemonCard(pokemon.name, pokemon.url)
@@ -104,11 +104,34 @@ fun PokedexScreen(pokedexViewModel: PokedexViewModel) {
                 }
 
                 is PokedexScreenState.Error -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center,
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text(text = "Error")
+                        Spacer(modifier = Modifier.size(40.dp))
+                        Box(
+                            modifier = Modifier
+                                .size(300.dp, 500.dp)
+                                .clip(RoundedCornerShape(15.dp))
+                                .background(MaterialTheme.colors.background),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
+                                Text(
+                                    text = "ERROR",
+                                    color = Color.Red,
+                                    fontSize = MaterialTheme.typography.h4.fontSize,
+                                )
+                                Text(
+                                    text = "No internet connection",
+                                    color = Color.Red,
+                                    fontSize = MaterialTheme.typography.h6.fontSize,
+                                )
+                            }
+                        }
                     }
                 }
 

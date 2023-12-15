@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.pokedex.android.R
-import com.example.pokedex.android.utils.ImageBuilder
+import com.example.pokedex.utils.ImageBuilder
 
 @Composable
 fun PokemonCard(name: String, url: String) {
